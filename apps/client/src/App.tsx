@@ -1,7 +1,11 @@
+import { Toaster } from '@/components/ui/sonner';
+import AppRouter from './router';
+
 function App() {
   return (
     <>
-      <h1>Vite + React + NestJS</h1>
+      <AppRouter />
+      <Toaster />
     </>
   );
 }
