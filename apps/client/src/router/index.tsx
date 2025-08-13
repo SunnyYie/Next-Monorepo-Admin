@@ -4,6 +4,7 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router';
+import { usePermissionRoutes } from './hooks/usePermissionRoutes';
 import { ErrorBoundary } from 'react-error-boundary';
 import { AppRouteObject } from './types';
 import { lazy, Suspense } from 'react';
@@ -15,6 +16,7 @@ import Error from '@/pages/errors/PageError';
 import Login from '@/pages/login';
 import Layout from '@/pages/layout';
 import Dashboard from '@/pages/dashboard';
+
 
 const PageError = lazy(() => import('@/pages/errors/PageError'));
 const Page403 = lazy(() => import('@/pages/errors/Page403'));
@@ -47,6 +49,7 @@ const ERROR_ROUTES: AppRouteObject = {
 };
 
 export default function AppRouter() {
+  const permissionRoutes = usePermissionRoutes();
   const PROTECTED_ROUTE: AppRouteObject = {
     path: '/',
     element: (
@@ -57,8 +60,10 @@ export default function AppRouter() {
     children: [
       { index: true, element: <Navigate to="/dashboard" replace /> },
       { path: 'dashboard', element: <Dashboard /> },
+      ...permissionRoutes,
     ],
   };
+
   const routes = [PUBLIC_ROUTE, PROTECTED_ROUTE, ERROR_ROUTES] as RouteObject[];
   const router = createBrowserRouter(routes);
 

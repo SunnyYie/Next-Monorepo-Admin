@@ -1,0 +1,114 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+enum RoleType {
+  OWNER @map("OWNER")
+  ADMIN @map("ADMIN")
+  USER  @map("USER")
+}
+
+model User {
+  id       String   @id @default(uuid())
+  email    String   @unique
+  phone    String   @unique
+  roleName RoleType
+  password String
+
+  name   String?
+  avatar String?
+
+  // 用户角色关系
+  userRoles UserRole[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        RoleType @unique
+  description String?
+
+  // 角色用户关系
+  userRoles       UserRole[]
+  // 角色权限关系
+  rolePermissions RolePermission[]
+
+  createdAt DateTime @default(now())
+}
+
+enum PermissionType {
+  CATALOGUE @map("0")
+  MENU      @map("1")
+  BUTTON    @map("2")
+}
+
+// 用户权限路由
+model UserPermissionRoutes {
+  id         String         @id @default(uuid())
+  name       String
+  label      String
+  type       PermissionType
+  route      String         @unique
+  order      Int?
+  icon       String?
+  component  String?
+  hideInMenu Boolean?       @default(false)
+  hide       Boolean?       @default(false)
+  roleName   RoleType[]
+
+  // 父子关系
+  parentId String?
+  parent   UserPermissionRoutes?  @relation("RouteHierarchy", fields: [parentId], references: [id])
+  children UserPermissionRoutes[] @relation("RouteHierarchy")
+
+  // 角色权限关系
+  rolePermissions RolePermission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 用户角色中间表
+model UserRole {
+  id     String @id @default(uuid())
+  userId String
+  roleId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, roleId])
+}
+
+// 角色权限中间表
+model RolePermission {
+  id           String @id @default(uuid())
+  roleId       String
+  permissionId String
+
+  role       Role                 @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission UserPermissionRoutes @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([roleId, permissionId])
+}
