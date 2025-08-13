@@ -1,13 +1,20 @@
-import { createBrowserRouter, RouteObject, RouterProvider } from 'react-router';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouteObject,
+  RouterProvider,
+} from 'react-router';
 import { ErrorBoundary } from 'react-error-boundary';
 import { AppRouteObject } from './types';
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router';
 
-import ProtectedRoute from '@/components/common/protected-route';
+// import ProtectedRoute from '@/components/common/protected-route';
 import CircleLoading from '@/components/common/circle-loading';
 import Error from '@/pages/errors/PageError';
 import Login from '@/pages/login';
+import Layout from '@/pages/layout';
+import Dashboard from '@/pages/dashboard';
 
 const PageError = lazy(() => import('@/pages/errors/PageError'));
 const Page403 = lazy(() => import('@/pages/errors/Page403'));
@@ -25,11 +32,11 @@ const PUBLIC_ROUTE: AppRouteObject = {
 
 const ERROR_ROUTES: AppRouteObject = {
   element: (
-    <ProtectedRoute>
-      <Suspense fallback={<CircleLoading />}>
-        <Outlet />
-      </Suspense>
-    </ProtectedRoute>
+    // <ProtectedRoute>
+    //   </ProtectedRoute>
+    <Suspense fallback={<CircleLoading />}>
+      <Outlet />
+    </Suspense>
   ),
   children: [
     { path: '403', element: <Page403 /> },
@@ -40,7 +47,19 @@ const ERROR_ROUTES: AppRouteObject = {
 };
 
 export default function AppRouter() {
-  const routes = [PUBLIC_ROUTE, ERROR_ROUTES] as RouteObject[];
+  const PROTECTED_ROUTE: AppRouteObject = {
+    path: '/',
+    element: (
+      // <ProtectedRoute>
+      // </ProtectedRoute>
+      <Layout />
+    ),
+    children: [
+      { index: true, element: <Navigate to="/dashboard" replace /> },
+      { path: 'dashboard', element: <Dashboard /> },
+    ],
+  };
+  const routes = [PUBLIC_ROUTE, PROTECTED_ROUTE, ERROR_ROUTES] as RouteObject[];
   const router = createBrowserRouter(routes);
 
   return (

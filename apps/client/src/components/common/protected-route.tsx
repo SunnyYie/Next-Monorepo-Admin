@@ -8,18 +8,18 @@ export default function ProtectedRoute({
 }: {
   children: React.ReactNode;
 }) {
-  const { accessToken } = useUserToken();
+  // const { accessToken } = useUserToken();
   const navigate = useNavigate();
 
-  const check = useCallback(() => {
-    if (!accessToken) {
-      navigate('/login', { replace: true });
-    }
-  }, [navigate, accessToken]);
+  // const check = useCallback(() => {
+  //   if (!accessToken) {
+  //     navigate('/login', { replace: true });
+  //   }
+  // }, [navigate, accessToken]);
 
-  useEffect(() => {
-    check();
-  }, [check]);
+  // useEffect(() => {
+  //   check();
+  // }, [check]);
 
   return (
     <ErrorBoundary FallbackComponent={PageError}>{children}</ErrorBoundary>
