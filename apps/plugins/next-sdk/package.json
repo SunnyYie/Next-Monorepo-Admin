@@ -1,0 +1,31 @@
+{
+  "name": "@next-admin/tracking-sdk",
+  "version": "1.0.0",
+  "description": "用户行为追踪和错误监控SDK",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "tracking",
+    "analytics",
+    "error-monitoring",
+    "user-behavior"
+  ],
+  "author": "Next Admin Team",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}

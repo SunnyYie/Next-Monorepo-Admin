@@ -5,12 +5,16 @@ import { PassportModule } from '@nestjs/passport';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaService } from './services/prisma.service';
+import { RedisService } from './services/redis.service';
 import { AuthService } from './services/auth.service';
 import { RoleService } from './services/role.service';
 import { PermissionService } from './services/permission.service';
+import { UserEventService } from './services/user-event.service';
 import { AuthController, UserController } from './controllers/auth.controller';
 import { RoleController } from './controllers/role.controller';
 import { PermissionController } from './controllers/permission.controller';
+import { UserEventController } from './controllers/user-event.controller';
+import { RedisController } from './controllers/redis.controller';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { RolesGuard, PermissionsGuard } from './auth/roles.guard';
@@ -32,13 +36,17 @@ import { RolesGuard, PermissionsGuard } from './auth/roles.guard';
     UserController,
     RoleController,
     PermissionController,
+    UserEventController,
+    RedisController,
   ],
   providers: [
     AppService,
     PrismaService,
+    RedisService,
     AuthService,
     RoleService,
     PermissionService,
+    UserEventService,
     JwtStrategy,
     JwtAuthGuard,
     RolesGuard,

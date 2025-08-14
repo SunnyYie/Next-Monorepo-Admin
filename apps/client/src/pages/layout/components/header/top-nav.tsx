@@ -7,18 +7,34 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
     title: string;
     href: string;
-    isActive: boolean;
     disabled?: boolean;
   }[];
 }
 
 export function TopNav({ className, links, ...props }: TopNavProps) {
+  const location = useLocation();
+
+  // Function to check if a link is active
+  const isActiveLink = (href: string) => {
+    const currentPath = location.pathname;
+    // Remove leading slash if present for comparison
+    const normalizedHref = href.startsWith('/') ? href : `/${href}`;
+    const normalizedCurrent = currentPath.endsWith('/')
+      ? currentPath.slice(0, -1)
+      : currentPath;
+
+    return (
+      normalizedCurrent === normalizedHref ||
+      normalizedCurrent.startsWith(normalizedHref + '/')
+    );
+  };
+
   return (
     <>
       <div className="md:hidden">
@@ -29,16 +45,19 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="bottom" align="start">
-            {links.map(({ title, href, isActive }) => (
-              <DropdownMenuItem key={`${title}-${href}`} asChild>
-                <Link
-                  to={href}
-                  className={!isActive ? 'text-muted-foreground' : ''}
-                >
-                  {title}
-                </Link>
-              </DropdownMenuItem>
-            ))}
+            {links.map(({ title, href }) => {
+              const isActive = isActiveLink(href);
+              return (
+                <DropdownMenuItem key={`${title}-${href}`} asChild>
+                  <Link
+                    to={href}
+                    className={!isActive ? 'text-muted-foreground' : ''}
+                  >
+                    {title}
+                  </Link>
+                </DropdownMenuItem>
+              );
+            })}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -50,15 +69,18 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
         )}
         {...props}
       >
-        {links.map(({ title, href, isActive }) => (
-          <Link
-            key={`${title}-${href}`}
-            to={href}
-            className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
-          >
-            {title}
-          </Link>
-        ))}
+        {links.map(({ title, href }) => {
+          const isActive = isActiveLink(href);
+          return (
+            <Link
+              key={`${title}-${href}`}
+              to={href}
+              className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
+            >
+              {title}
+            </Link>
+          );
+        })}
       </nav>
     </>
   );

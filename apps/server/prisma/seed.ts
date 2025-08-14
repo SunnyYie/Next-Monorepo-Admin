@@ -354,12 +354,109 @@ async function main() {
     },
   });
 
+  // 5. 创建示例用户事件数据
+  console.log('创建示例用户事件数据...');
+  const sampleEvents = [
+    {
+      userId: normalUser.id,
+      userName: normalUser.name || 'User',
+      eventType: 'page_view',
+      pagePath: '/dashboard',
+      pageTitle: '仪表板',
+      duration: 15000,
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      platform: 'Win32',
+      browser: 'Chrome',
+      browserVersion: '120.0.0.0',
+      screenResolution: '1920x1080',
+      language: 'zh-CN',
+      timezone: 'Asia/Shanghai',
+      sessionId: 'session-001',
+      referrer: '',
+    },
+    {
+      userId: normalUser.id,
+      userName: normalUser.name || 'User',
+      eventType: 'button_click',
+      pagePath: '/dashboard',
+      pageTitle: '仪表板',
+      elementId: 'user-menu-button',
+      elementType: 'button',
+      elementText: '用户菜单',
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      platform: 'Win32',
+      browser: 'Chrome',
+      browserVersion: '120.0.0.0',
+      screenResolution: '1920x1080',
+      language: 'zh-CN',
+      timezone: 'Asia/Shanghai',
+      sessionId: 'session-001',
+    },
+    {
+      userId: normalUser.id,
+      userName: normalUser.name || 'User',
+      eventType: 'api_request',
+      apiUrl: '/api/user/profile',
+      httpMethod: 'GET',
+      responseTime: 245,
+      statusCode: 200,
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      platform: 'Win32',
+      browser: 'Chrome',
+      browserVersion: '120.0.0.0',
+      sessionId: 'session-001',
+    },
+    {
+      userId: testUser.id,
+      userName: testUser.name || 'Admin',
+      eventType: 'page_view',
+      pagePath: '/admin/users',
+      pageTitle: '用户管理',
+      duration: 25000,
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      platform: 'Win32',
+      browser: 'Chrome',
+      browserVersion: '120.0.0.0',
+      screenResolution: '1920x1080',
+      language: 'zh-CN',
+      timezone: 'Asia/Shanghai',
+      sessionId: 'session-002',
+      referrer: '/dashboard',
+    },
+    {
+      userId: testUser.id,
+      userName: testUser.name || 'Admin',
+      eventType: 'error',
+      pagePath: '/admin/users',
+      pageTitle: '用户管理',
+      errorMessage: 'Network Error: Failed to fetch user list',
+      errorStack: 'Error: Network Error\n    at fetchUsers (users.js:45:12)',
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      platform: 'Win32',
+      browser: 'Chrome',
+      browserVersion: '120.0.0.0',
+      sessionId: 'session-002',
+    },
+  ];
+
+  for (const eventData of sampleEvents) {
+    await prisma.userEvent.create({
+      data: {
+        ...eventData,
+        eventData: {},
+        tags: [],
+        customData: {},
+      },
+    });
+  }
+
   console.log('✅ 数据库种子数据初始化完成!');
 
   console.log('\n📊 数据总结:');
   console.log(`- 角色: ${roles.length} 个`);
   console.log(`- 权限路由: ${allRoutes.length} 个`);
   console.log(`- 用户: 4 个`);
+  console.log(`- 示例事件: ${sampleEvents.length} 个`);
   console.log('\n👤 测试用户账号:');
   console.log('1. owner@example.com / 123456 (OWNER角色)');
   console.log('2. 739507691@qq.com / 123456 (OWNER角色)');

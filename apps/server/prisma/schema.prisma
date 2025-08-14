@@ -112,3 +112,63 @@ model RolePermission {
 
   @@unique([roleId, permissionId])
 }
+
+// 用户埋点记录
+model UserEvent {
+  id        String @id @default(uuid())
+  userId    String
+  userName  String
+  eventType String // 事件类型：page_view, button_click, api_request, page_leave, etc.
+  eventData Json? // 事件详细数据
+
+  // 页面相关信息
+  pagePath  String? // 页面路径
+  pageTitle String? // 页面标题
+  duration  Int? // 停留时间（毫秒）
+
+  // 用户交互信息
+  elementId   String? // 点击元素ID
+  elementType String? // 元素类型：button, link, input, etc.
+  elementText String? // 元素文本内容
+
+  // 请求相关信息
+  apiUrl       String? // API 请求地址
+  httpMethod   String? // HTTP 方法
+  responseTime Int? // 响应时间（毫秒）
+  statusCode   Int? // 响应状态码
+
+  // 设备和环境信息
+  userAgent        String? // 用户代理字符串
+  platform         String? // 操作系统平台
+  browser          String? // 浏览器名称
+  browserVersion   String? // 浏览器版本
+  screenResolution String? // 屏幕分辨率
+  language         String? // 浏览器语言
+  timezone         String? // 时区
+
+  // IP 和地理位置信息
+  ipAddress String? // IP 地址
+  country   String? // 国家
+  region    String? // 地区
+  city      String? // 城市
+
+  // 会话信息
+  sessionId String? // 会话ID
+  referrer  String? // 来源页面
+
+  // 错误信息（如果是错误事件）
+  errorMessage String? // 错误消息
+  errorStack   String? // 错误堆栈
+
+  // 自定义标签和属性
+  tags       String[] // 自定义标签
+  customData Json? // 自定义数据
+
+  createdAt DateTime @default(now())
+
+  // 添加索引以提高查询性能
+  @@index([userId, createdAt])
+  @@index([eventType, createdAt])
+  @@index([pagePath, createdAt])
+  @@index([sessionId, createdAt])
+}

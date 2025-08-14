@@ -16,7 +16,8 @@ import Error from '@/pages/errors/PageError';
 import Login from '@/pages/login';
 import Layout from '@/pages/layout';
 import Dashboard from '@/pages/dashboard';
-
+import UserEventList from '@/pages/dashboard/user-event-list';
+import TrackingDemo from '@/pages/tracking';
 
 const PageError = lazy(() => import('@/pages/errors/PageError'));
 const Page403 = lazy(() => import('@/pages/errors/Page403'));
@@ -59,8 +60,28 @@ export default function AppRouter() {
     ),
     children: [
       { index: true, element: <Navigate to="/dashboard" replace /> },
-      { path: 'dashboard', element: <Dashboard /> },
-      ...permissionRoutes,
+      {
+        path: 'dashboard',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/workspace" replace />,
+          },
+          {
+            path: 'workspace',
+            element: <Dashboard />,
+          },
+          {
+            path: 'userEvent',
+            element: <UserEventList />,
+          },
+        ],
+      },
+      {
+        path: 'tracking',
+        element: <TrackingDemo />,
+      },
+      // ...permissionRoutes,
     ],
   };
 
