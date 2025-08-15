@@ -18,6 +18,8 @@ import Layout from '@/pages/layout';
 import Dashboard from '@/pages/dashboard';
 import UserEventList from '@/pages/dashboard/user-event-list';
 import TrackingDemo from '@/pages/tracking';
+import MessageList from '@/pages/message-list';
+import RecruitList from '@/pages/message-list/recruit-list';
 
 const PageError = lazy(() => import('@/pages/errors/PageError'));
 const Page403 = lazy(() => import('@/pages/errors/Page403'));
@@ -80,6 +82,23 @@ export default function AppRouter() {
       {
         path: 'tracking',
         element: <TrackingDemo />,
+      },
+      {
+        path: 'message-list',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/message-list/overflow" replace />,
+          },
+          {
+            path: 'overflow',
+            element: <MessageList />,
+          },
+          {
+            path: 'recruit',
+            element: <RecruitList />,
+          },
+        ],
       },
       // ...permissionRoutes,
     ],
