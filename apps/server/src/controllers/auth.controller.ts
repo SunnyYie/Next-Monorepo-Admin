@@ -22,6 +22,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard, PermissionsGuard } from '../auth/roles.guard';
 import { Roles, Permissions } from '../auth/decorators';
 import { RoleType } from '../../generated/prisma';
+import { ApiSuccessResponse, ApiErrorResponse } from '../common';
 
 @ApiTags('认证管理')
 @Controller('auth')
@@ -30,16 +31,34 @@ export class AuthController {
 
   @Post('login')
   @ApiOperation({ summary: '用户登录' })
-  @ApiResponse({ status: 200, description: '登录成功' })
-  @ApiResponse({ status: 401, description: '登录失败' })
+  @ApiSuccessResponse(200, '登录成功', {
+    access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
+    user: {
+      id: 'user-id',
+      email: 'user@example.com',
+      name: '用户名',
+      avatar: 'avatar-url',
+      roleName: 'USER',
+      roles: [],
+      flattenPermissions: [],
+      permissions: [],
+    },
+  })
+  @ApiErrorResponse(401, '邮箱或密码错误')
   login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
   }
 
   @Post('register')
   @ApiOperation({ summary: '用户注册' })
-  @ApiResponse({ status: 201, description: '注册成功' })
-  @ApiResponse({ status: 409, description: '用户已存在' })
+  @ApiSuccessResponse(201, '注册成功', {
+    id: 'user-id',
+    email: 'user@example.com',
+    name: '用户名',
+    phone: '13800138000',
+    roleName: 'USER',
+  })
+  @ApiErrorResponse(409, '邮箱已被注册')
   register(@Body() registerDto: RegisterDto) {
     return this.authService.register(registerDto);
   }
@@ -48,7 +67,13 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: '获取当前用户信息' })
-  @ApiResponse({ status: 200, description: '获取成功' })
+  @ApiSuccessResponse(200, '获取成功', {
+    id: 'user-id',
+    email: 'user@example.com',
+    name: '用户名',
+    avatar: 'avatar-url',
+    roleName: 'USER',
+  })
   getProfile(@Request() req) {
     return req.user;
   }
@@ -65,7 +90,15 @@ export class UserController {
   @Roles(RoleType.ADMIN, RoleType.OWNER)
   // @Permissions('user:read')
   @ApiOperation({ summary: '获取所有用户' })
-  @ApiResponse({ status: 200, description: '获取成功' })
+  @ApiSuccessResponse(200, '获取成功', [
+    {
+      id: 'user-id',
+      email: 'user@example.com',
+      name: '用户名',
+      phone: '13800138000',
+      roleName: 'USER',
+    },
+  ])
   findAll() {
     return this.authService.findAllUsers();
   }

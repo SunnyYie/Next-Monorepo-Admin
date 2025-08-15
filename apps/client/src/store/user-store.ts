@@ -45,8 +45,6 @@ export const useUserInfo = () => useUserStore((state) => state.userInfo);
 export const useUserToken = () => useUserStore((state) => state.userToken);
 export const useUserPermission = () =>
   useUserStore((state) => state.userInfo.permissions);
-export const useUserPermissionKeys = () =>
-  useUserStore((state) => state.userInfo.permissionKeys);
 export const useUserFlattenPermissions = () =>
   useUserStore((state) => state.userInfo.flattenPermissions);
 export const useUserActions = () => useUserStore((state) => state.actions);

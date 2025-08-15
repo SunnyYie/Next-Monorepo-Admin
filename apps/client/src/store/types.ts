@@ -35,7 +35,7 @@ export interface Permission {
 
 export interface UserToken {
   accessToken?: string;
-  refreshToken?: string;
+  // refreshToken?: string;
 }
 export interface RolePermissionKey {
   id: string;
@@ -57,19 +57,17 @@ export interface UserInfo {
   name: string;
   password?: string;
   avatar?: string;
-  role?: Role;
+  role?: Role[];
   permissions?: Permission[];
-  permissionKeys?: PermissionKey[];
   flattenPermissions?: Permission[];
 }
 
 export interface Role {
   id: string;
   name: string;
-  label: string;
-  order?: number;
   description?: string;
-  permission?: Permission[];
+  createdAt?: Date;
+  rolePermissions?: Permission[];
 }
 
 export enum StorageEnum {

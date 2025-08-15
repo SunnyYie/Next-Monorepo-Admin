@@ -107,7 +107,7 @@ export class AuthService {
   async register(registerDto: RegisterDto) {
     // 检查邮箱是否已存在
     const existingUserByEmail = await this.prisma.user.findUnique({
-      where: { email: registerDto.email },
+      where: { email: registerDto?.email || registerDto?.phone },
     });
 
     if (existingUserByEmail) {
@@ -116,7 +116,7 @@ export class AuthService {
 
     // 检查手机号是否已存在
     const existingUserByPhone = await this.prisma.user.findUnique({
-      where: { phone: registerDto.phone },
+      where: { phone: registerDto?.phone || registerDto?.email },
     });
 
     if (existingUserByPhone) {
@@ -129,8 +129,8 @@ export class AuthService {
     // 创建用户
     const user = await this.prisma.user.create({
       data: {
-        email: registerDto.email,
-        phone: registerDto.phone,
+        email: registerDto?.email || registerDto?.phone,
+        phone: registerDto?.phone || registerDto?.email,
         password: hashedPassword,
         name: registerDto.name,
         avatar: registerDto.avatar,

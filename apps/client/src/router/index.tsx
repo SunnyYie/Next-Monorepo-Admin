@@ -10,7 +10,7 @@ import { AppRouteObject } from './types';
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router';
 
-// import ProtectedRoute from '@/components/common/protected-route';
+import ProtectedRoute from '@/components/common/protected-route';
 import CircleLoading from '@/components/common/circle-loading';
 import Error from '@/pages/errors/PageError';
 import Login from '@/pages/login';
@@ -54,9 +54,9 @@ export default function AppRouter() {
   const PROTECTED_ROUTE: AppRouteObject = {
     path: '/',
     element: (
-      // <ProtectedRoute>
-      // </ProtectedRoute>
-      <Layout />
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
     ),
     children: [
       { index: true, element: <Navigate to="/dashboard" replace /> },

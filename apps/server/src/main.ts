@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
+import { ResponseInterceptor, AllExceptionsFilter } from './common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +15,12 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  // 全局响应拦截器
+  app.useGlobalInterceptors(new ResponseInterceptor());
+
+  // 全局异常过滤器
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   // Enable CORS for frontend
   app.enableCors({

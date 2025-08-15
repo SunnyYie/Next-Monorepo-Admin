@@ -1,34 +1,26 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Mail, Phone } from 'lucide-react';
 import { toast } from 'sonner';
-
-// 验证手机号的正则表达式
-const phoneRegex = /^1[3-9]\d{9}$/;
-
-// 登录表单验证schema
-const loginSchema = z.object({
-  account: z
-    .string()
-    .min(1, '请输入手机号或邮箱')
-    .refine((value) => {
-      // 检查是否为有效的邮箱或手机号
-      const isEmail = z.string().email().safeParse(value).success;
-      const isPhone = phoneRegex.test(value);
-      return isEmail || isPhone;
-    }, '请输入有效的手机号或邮箱地址'),
-  password: z.string().min(6, '密码至少6位').max(50, '密码不能超过50位'),
-});
-
-type LoginFormData = z.infer<typeof loginSchema>;
+import userService from '@/api/services/auth';
+import { useNavigate } from 'react-router';
+import { useMutation } from '@tanstack/react-query';
+import { useUserActions } from '@/store/user-store';
+import { LoginFormData, loginSchema, phoneRegex } from '../config';
 
 export function LoginForm() {
+  const { setUserToken, setUserInfo } = useUserActions();
+  const navigate = useNavigate();
+
+  const signInMutation = useMutation({
+    mutationFn: userService.signin,
+  });
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -50,11 +42,16 @@ export function LoginForm() {
     setError('');
 
     try {
-      // 模拟API调用
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const res = await signInMutation.mutateAsync({
+        email: isPhone ? '' : data.account,
+        phone: isPhone ? data.account : '',
+        password: data.password,
+      });
+      const { user, accessToken } = res;
 
-      // 这里应该调用实际的登录API
-      console.log('登录数据:', data);
+      setUserToken({ accessToken });
+      setUserInfo(user);
+      navigate('/dashboard/workbench');
 
       toast.success('登录成功', {
         description: `欢迎回来！使用${isPhone ? '手机号' : '邮箱'}登录成功。`,
