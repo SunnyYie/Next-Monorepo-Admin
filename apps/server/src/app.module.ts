@@ -10,11 +10,13 @@ import { AuthService } from './services/auth.service';
 import { RoleService } from './services/role.service';
 import { PermissionService } from './services/permission.service';
 import { UserEventService } from './services/user-event.service';
+import { JobInfoService } from './services/job-info.service';
 import { AuthController, UserController } from './controllers/auth.controller';
 import { RoleController } from './controllers/role.controller';
 import { PermissionController } from './controllers/permission.controller';
 import { UserEventController } from './controllers/user-event.controller';
 import { RedisController } from './controllers/redis.controller';
+import { JobInfoController } from './controllers/job-info.controller';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { RolesGuard, PermissionsGuard } from './auth/roles.guard';
@@ -38,6 +40,7 @@ import { RolesGuard, PermissionsGuard } from './auth/roles.guard';
     PermissionController,
     UserEventController,
     RedisController,
+    JobInfoController,
   ],
   providers: [
     AppService,
@@ -47,6 +50,7 @@ import { RolesGuard, PermissionsGuard } from './auth/roles.guard';
     RoleService,
     PermissionService,
     UserEventService,
+    JobInfoService,
     JwtStrategy,
     JwtAuthGuard,
     RolesGuard,

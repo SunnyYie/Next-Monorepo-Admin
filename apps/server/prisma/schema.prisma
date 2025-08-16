@@ -172,3 +172,35 @@ model UserEvent {
   @@index([pagePath, createdAt])
   @@index([sessionId, createdAt])
 }
+
+// 岗位信息表
+model JobInfo {
+  id             String   @id @default(uuid())
+  jobName        String // 岗位名称
+  salaryDesc     String // 薪资描述
+  jobLabels      String[] // 岗位标签
+  jobValidStatus Int // 岗位有效状态
+  iconWord       String? // 图标文字
+  skills         String[] // 技能要求
+  jobDegree      String? // 学历要求
+  cityName       String? // 城市名称
+  brandName      String // 公司名称
+  brandIndustry  String? // 公司行业
+  brandScaleName String? // 公司规模
+  welfareList    String[] // 福利列表
+
+  // 元数据
+  source   String? // 数据来源
+  dataDate String? // 数据日期
+  isActive Boolean @default(true) // 是否启用
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 添加索引以提高查询性能
+  @@index([brandName, createdAt])
+  @@index([jobName, createdAt])
+  @@index([cityName, createdAt])
+  @@index([brandIndustry, createdAt])
+  @@index([isActive, createdAt])
+}

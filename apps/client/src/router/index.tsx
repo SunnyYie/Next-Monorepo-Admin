@@ -20,6 +20,7 @@ import UserEventList from '@/pages/dashboard/user-event-list';
 import TrackingDemo from '@/pages/tracking';
 import MessageList from '@/pages/message-list';
 import RecruitList from '@/pages/message-list/recruit-list';
+import JobDetail from '@/pages/message-list/components/job-detail';
 
 const PageError = lazy(() => import('@/pages/errors/PageError'));
 const Page403 = lazy(() => import('@/pages/errors/Page403'));
@@ -56,9 +57,9 @@ export default function AppRouter() {
   const PROTECTED_ROUTE: AppRouteObject = {
     path: '/',
     element: (
-      <ProtectedRoute>
+      // <ProtectedRoute>
+      // </ProtectedRoute>
         <Layout />
-      </ProtectedRoute>
     ),
     children: [
       { index: true, element: <Navigate to="/dashboard" replace /> },
@@ -97,6 +98,10 @@ export default function AppRouter() {
           {
             path: 'recruit',
             element: <RecruitList />,
+          },
+          {
+            path: 'recruit/:id',
+            element: <JobDetail />,
           },
         ],
       },

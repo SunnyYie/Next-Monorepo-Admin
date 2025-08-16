@@ -5,20 +5,20 @@
       "args": ["apps/client/node_modules/mcp-jobs/dist/mcp.js"],
       "cwd": "d:\\Web\\project\\next-admin"
     },
-    "feishu": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@larksuiteoapi/lark-mcp",
-        "mcp",
-        "-a",
-        "cli_a815b5b7a8785013",
-        "-s",
-        "QjCUThN34Kk4MB3oA6zRAc13GYiCsW3j",
-        "-u",
-        "u-cg7xBgnShb1GHZ6DcpjnQ9l06P05l12pqq001lkwa4kE"
-      ]
-    }
+    // "feishu": {
+    //   "command": "npx",
+    //   "args": [
+    //     "-y",
+    //     "@larksuiteoapi/lark-mcp",
+    //     "mcp",
+    //     "-a",
+    //     "cli_a815b5b7a8785013",
+    //     "-s",
+    //     "QjCUThN34Kk4MB3oA6zRAc13GYiCsW3j",
+    //     "-u",
+    //     "u-cg7xBgnShb1GHZ6DcpjnQ9l06P05l12pqq001lkwa4kE"
+    //   ]
+    // }
   },
   "inputs": []
 }
