@@ -206,6 +206,112 @@ export class JobInfoService {
     }
   }
 
+  // 清理过期岗位数据
+  async cleanupExpiredJobs(hoursAgo: number = 48) {
+    try {
+      const cutoffDate = new Date();
+      cutoffDate.setHours(cutoffDate.getHours() - hoursAgo);
+
+      const result = await this.prisma.jobInfo.deleteMany({
+        where: {
+          createdAt: {
+            lt: cutoffDate,
+          },
+        },
+      });
+
+      return {
+        message: `清理${hoursAgo}小时前的数据成功`,
+        count: result.count,
+        cutoffDate: cutoffDate.toISOString(),
+      };
+    } catch (error) {
+      throw new BadRequestException('清理过期岗位数据失败');
+    }
+  }
+
+  // 清理不活跃的过期岗位数据
+  async cleanupInactiveExpiredJobs(hoursAgo: number = 48) {
+    try {
+      const cutoffDate = new Date();
+      cutoffDate.setHours(cutoffDate.getHours() - hoursAgo);
+
+      const result = await this.prisma.jobInfo.deleteMany({
+        where: {
+          AND: [
+            {
+              createdAt: {
+                lt: cutoffDate,
+              },
+            },
+            {
+              isActive: false,
+            },
+          ],
+        },
+      });
+
+      return {
+        message: `清理${hoursAgo}小时前的不活跃数据成功`,
+        count: result.count,
+        cutoffDate: cutoffDate.toISOString(),
+      };
+    } catch (error) {
+      throw new BadRequestException('清理过期不活跃岗位数据失败');
+    }
+  }
+
+  // 获取即将过期的数据统计
+  async getExpiringJobsStats(hoursAgo: number = 48) {
+    try {
+      const cutoffDate = new Date();
+      cutoffDate.setHours(cutoffDate.getHours() - hoursAgo);
+
+      const [expiredCount, expiredInactiveCount, totalCount, activeCount] =
+        await Promise.all([
+          this.prisma.jobInfo.count({
+            where: {
+              createdAt: {
+                lt: cutoffDate,
+              },
+            },
+          }),
+          this.prisma.jobInfo.count({
+            where: {
+              AND: [
+                {
+                  createdAt: {
+                    lt: cutoffDate,
+                  },
+                },
+                {
+                  isActive: false,
+                },
+              ],
+            },
+          }),
+          this.prisma.jobInfo.count(),
+          this.prisma.jobInfo.count({
+            where: { isActive: true },
+          }),
+        ]);
+
+      return {
+        cutoffDate: cutoffDate.toISOString(),
+        hoursAgo,
+        stats: {
+          total: totalCount,
+          active: activeCount,
+          inactive: totalCount - activeCount,
+          expired: expiredCount,
+          expiredInactive: expiredInactiveCount,
+        },
+      };
+    } catch (error) {
+      throw new BadRequestException('获取过期数据统计失败');
+    }
+  }
+
   // 根据公司名称统计岗位数量
   async getJobCountByCompany() {
     try {

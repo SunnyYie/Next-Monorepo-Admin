@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
   Query,
-  UseGuards,
 } from '@nestjs/common';
 import { JobInfoService } from '../services/job-info.service';
 import {
@@ -17,8 +16,6 @@ import {
   BatchCreateJobInfoDto,
   BatchDeleteJobInfoDto,
 } from '../dto/job-info.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/decorators';
 import { RoleType } from 'generated/prisma';
 
@@ -94,8 +91,31 @@ export class JobInfoController {
 
   // 批量删除岗位信息
   @Delete('batch/remove')
-  @Roles(RoleType.ADMIN, RoleType.OWNER)
+  // @Roles(RoleType.ADMIN, RoleType.OWNER)
   batchRemove(@Body() batchDeleteJobInfoDto: BatchDeleteJobInfoDto) {
     return this.jobInfoService.batchRemove(batchDeleteJobInfoDto);
+  }
+
+  // 清理过期岗位数据
+  @Delete('cleanup/expired')
+  // @Roles(RoleType.ADMIN, RoleType.OWNER)
+  cleanupExpiredJobs(@Query('hours') hours?: string) {
+    const hoursAgo = hours ? parseInt(hours) : 48;
+    return this.jobInfoService.cleanupExpiredJobs(hoursAgo);
+  }
+
+  // 清理不活跃的过期岗位数据
+  @Delete('cleanup/inactive-expired')
+  // @Roles(RoleType.ADMIN, RoleType.OWNER)
+  cleanupInactiveExpiredJobs(@Query('hours') hours?: string) {
+    const hoursAgo = hours ? parseInt(hours) : 48;
+    return this.jobInfoService.cleanupInactiveExpiredJobs(hoursAgo);
+  }
+
+  // 获取即将过期的数据统计
+  @Get('stats/expiring')
+  getExpiringJobsStats(@Query('hours') hours?: string) {
+    const hoursAgo = hours ? parseInt(hours) : 48;
+    return this.jobInfoService.getExpiringJobsStats(hoursAgo);
   }
 }

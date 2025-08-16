@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaService } from './services/prisma.service';
@@ -11,6 +12,7 @@ import { RoleService } from './services/role.service';
 import { PermissionService } from './services/permission.service';
 import { UserEventService } from './services/user-event.service';
 import { JobInfoService } from './services/job-info.service';
+import { JobCleanupSchedulerService } from './services/job-cleanup-scheduler.service';
 import { AuthController, UserController } from './controllers/auth.controller';
 import { RoleController } from './controllers/role.controller';
 import { PermissionController } from './controllers/permission.controller';
@@ -26,6 +28,7 @@ import { RolesGuard, PermissionsGuard } from './auth/roles.guard';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    ScheduleModule.forRoot(), // 启用定时任务
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'jwt-secret-key',
@@ -51,6 +54,7 @@ import { RolesGuard, PermissionsGuard } from './auth/roles.guard';
     PermissionService,
     UserEventService,
     JobInfoService,
+    JobCleanupSchedulerService, // 添加定时任务服务
     JwtStrategy,
     JwtAuthGuard,
     RolesGuard,

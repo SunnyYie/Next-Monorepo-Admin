@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import * as NextSDK from '@next-admin/tracking-sdk';
 import { createRoot } from 'react-dom/client';
 import { StrictMode, Suspense } from 'react';
@@ -38,6 +39,7 @@ createRoot(document.getElementById('root')!).render(
       <Suspense>
         <App />
       </Suspense>
+      <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   </StrictMode>
 );

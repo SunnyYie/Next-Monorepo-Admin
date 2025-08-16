@@ -19,7 +19,11 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "clean": "rm -rf dist",
-    "db:seed": "ts-node prisma/seed.ts"
+    "db:seed": "ts-node prisma/seed.ts",
+    "cleanup-jobs": "ts-node scripts/cleanup-job-data.ts",
+    "cleanup-jobs:preview": "ts-node scripts/cleanup-job-data.ts -- --dry-run",
+    "cleanup-jobs:inactive": "ts-node scripts/cleanup-job-data.ts -- --inactive-only",
+    "cleanup-jobs:stats": "ts-node scripts/cleanup-job-data.ts -- --stats"
   },
   "dependencies": {
     "@nestjs/cache-manager": "^3.0.1",
@@ -29,6 +33,7 @@
     "@nestjs/jwt": "^11.0.0",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/schedule": "^6.0.0",
     "@nestjs/swagger": "^11.2.0",
     "@types/bcrypt": "^6.0.0",
     "@types/passport-jwt": "^4.0.1",
