@@ -39,7 +39,7 @@ createRoot(document.getElementById('root')!).render(
       <Suspense>
         <App />
       </Suspense>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>
 );

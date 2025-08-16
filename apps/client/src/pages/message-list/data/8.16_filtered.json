@@ -1,0 +1,338 @@
+[
+  {
+    "jobName": "高级前端开发工程师-北京",
+    "salaryDesc": "15-28K·15薪",
+    "jobLabels": [
+      "1年以内",
+      "本科"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "其他"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "滴滴",
+    "brandIndustry": "移动互联网",
+    "brandScaleName": "1000-9999人",
+    "welfareList": [
+      "补充医疗保险",
+      "定期体检",
+      "五险一金"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  },
+  {
+    "jobName": "【2026校园招聘】web前端开发工程师",
+    "salaryDesc": "15-25K",
+    "jobLabels": [
+      "在校/应届",
+      "本科",
+      "Vue",
+      "JavaScript"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "Vue",
+      "JavaScript"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "小黑盒",
+    "brandIndustry": "游戏",
+    "brandScaleName": "100-499人",
+    "welfareList": [
+      "带薪年假",
+      "年终奖",
+      "游戏补助",
+      "股票期权",
+      "五险一金",
+      "员工旅游",
+      "定期体检",
+      "节日福利",
+      "零食下午茶"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  },
+  {
+    "jobName": "Web前端开发工程师2026届",
+    "salaryDesc": "15-25K·14薪",
+    "jobLabels": [
+      "在校/应届",
+      "本科",
+      "JavaScript",
+      "HTML5",
+      "CSS"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "JavaScript",
+      "HTML5",
+      "CSS",
+      "计算机/软件工程相关专业",
+      "前端开发经验"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "柠檬微趣",
+    "brandIndustry": "游戏",
+    "brandScaleName": "100-499人",
+    "welfareList": [
+      "餐补",
+      "年终奖",
+      "补充医疗保险",
+      "员工旅游",
+      "零食下午茶",
+      "五险一金",
+      "法定节假日三薪",
+      "定期体检",
+      "全勤奖",
+      "带薪年假",
+      "包吃",
+      "意外险",
+      "节日福利",
+      "团建聚餐",
+      "交通补助",
+      "通讯补贴",
+      "加班补助",
+      "生日福利"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  },
+  {
+    "jobName": "前端开发工程师（2026）（MJ007544）",
+    "salaryDesc": "15-30K·16薪",
+    "jobLabels": [
+      "在校/应届",
+      "本科",
+      "计算机/软件工程相关专业",
+      "前端开发经验"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "计算机/软件工程相关专业",
+      "前端开发经验"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "去哪儿网",
+    "brandIndustry": "互联网",
+    "brandScaleName": "1000-9999人",
+    "welfareList": [
+      "节日福利",
+      "交通补助",
+      "员工旅游",
+      "五险一金",
+      "定期体检",
+      "年终奖",
+      "带薪年假"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  },
+  {
+    "jobName": "前端开发工程师",
+    "salaryDesc": "15-30K·14薪",
+    "jobLabels": [
+      "1-3年",
+      "本科",
+      "HTML5",
+      "CSS",
+      "计算机/软件工程相关专业"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "HTML5",
+      "CSS",
+      "计算机/软件工程相关专业",
+      "前端开发经验",
+      "不接受居家办公"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "中科院计算所",
+    "brandIndustry": "计算机软件",
+    "brandScaleName": "100-499人",
+    "welfareList": [
+      "五险一金",
+      "员工旅游",
+      "餐补",
+      "带薪年假",
+      "年终奖",
+      "补充医疗保险",
+      "节日福利",
+      "定期体检"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  },
+  {
+    "jobName": "前端工程师(A115517)",
+    "salaryDesc": "15-30K",
+    "jobLabels": [
+      "1-3年",
+      "本科",
+      "JavaScript",
+      "Python",
+      "Java"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "JavaScript",
+      "Python",
+      "Java",
+      "不接受居家办公"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "水滴公司",
+    "brandIndustry": "互联网",
+    "brandScaleName": "1000-9999人",
+    "welfareList": [
+      "年终奖",
+      "交通补贴",
+      "健身房",
+      "五险一金",
+      "股票期权",
+      "团建聚餐",
+      "节日福利"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  },
+  {
+    "jobName": "前端开发工程师",
+    "salaryDesc": "15-20K",
+    "jobLabels": [
+      "1-3年",
+      "本科",
+      "计算机/软件工程相关专业"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "计算机/软件工程相关专业"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "图灵机器人",
+    "brandIndustry": "互联网",
+    "brandScaleName": "100-499人",
+    "welfareList": [
+      "餐补",
+      "团建聚餐",
+      "零食下午茶",
+      "定期体检",
+      "有无线网",
+      "交通补助",
+      "加班补助",
+      "节日福利",
+      "股票期权",
+      "带薪年假",
+      "生日福利",
+      "五险一金",
+      "绩效奖金"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  },
+  {
+    "jobName": "初级前端开发工程师",
+    "salaryDesc": "18-20K",
+    "jobLabels": [
+      "1-3年",
+      "本科",
+      "接受实习/在校生投递",
+      "CSS",
+      "JavaScript"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "接受实习/在校生投递",
+      "CSS",
+      "JavaScript",
+      "HTML5",
+      "计算机/软件工程相关专业"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "BOSS直聘",
+    "brandIndustry": "人力资源服务",
+    "brandScaleName": "1000-9999人",
+    "welfareList": [
+      "带薪年假",
+      "股票期权",
+      "定期体检",
+      "年终奖",
+      "交通补助",
+      "节日福利",
+      "补充医疗保险",
+      "住房补贴",
+      "餐补",
+      "加班补助",
+      "员工旅游"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  },
+  {
+    "jobName": "web前端",
+    "salaryDesc": "15-27K·14薪",
+    "jobLabels": [
+      "1-3年",
+      "本科",
+      "JavaScript"
+    ],
+    "jobValidStatus": 1,
+    "iconWord": "",
+    "skills": [
+      "JavaScript"
+    ],
+    "jobDegree": "本科",
+    "cityName": "北京",
+    "brandName": "途游游戏",
+    "brandIndustry": "游戏",
+    "brandScaleName": "1000-9999人",
+    "welfareList": [
+      "带薪年假",
+      "五险一金",
+      "年终奖",
+      "通讯补贴",
+      "员工旅游",
+      "零食下午茶",
+      "节假日加班费",
+      "补充医疗保险",
+      "餐补",
+      "全勤奖",
+      "免费工装",
+      "团建聚餐",
+      "定期体检",
+      "生日福利",
+      "绩效奖金",
+      "节日福利",
+      "交通补助",
+      "股票期权"
+    ],
+    "source": "boss直聘",
+    "dataDate": "2025-08-16",
+    "isActive": true
+  }
+]

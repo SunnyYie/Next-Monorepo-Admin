@@ -21,6 +21,7 @@ import TrackingDemo from '@/pages/tracking';
 import MessageList from '@/pages/message-list';
 import RecruitList from '@/pages/message-list/recruit-list';
 import JobDetail from '@/pages/message-list/components/job-detail';
+import Settings from '@/pages/settings';
 
 const PageError = lazy(() => import('@/pages/errors/PageError'));
 const Page403 = lazy(() => import('@/pages/errors/Page403'));
@@ -105,6 +106,10 @@ export default function AppRouter() {
           },
         ],
       },
+      {
+        path: 'settings',
+        element: <Settings />,
+      }
       // ...permissionRoutes,
     ],
   };
